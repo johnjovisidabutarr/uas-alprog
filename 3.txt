@@ -1,0 +1,43 @@
+program SD 
+kamus
+    constant MAX : integer = 2021
+    type siswa <
+    	nama : string,
+    	mtk, bahasa, ipa : integer
+    	>
+    type kelas : array [0..MAX -1] of siswa
+    data: kelas
+    N,i : integer
+    nama: string
+algoritma
+    input_data(data,N)
+    sort_data(data,N)
+    input(nama)
+    i = search_data(data,N,nama)
+    if (i != -1) then
+        print("Nilai rata-rata dari", data[i].nama, "adalah",rata_rata(data[i]))
+    endif
+    print_data(data,N)
+endprogram
+
+procedure input_data(in/out T : kelas, in/out N : integer) 
+{ I.S. Data siswa telah siap pada piranti masukan
+  Proses. Melakukan proses masukan dari user hingga nama yang diinputkan adalah "stop" atau array telah penuh
+  F.S. Array T berisi sejumlah N siswa }
+  Kamus
+
+  Algoritma :
+  
+function rata_rata(M :siswa) -> real
+{ Mengembalikan nilai rata dari matematika, bahasa, dan ipa}
+
+function search_data(T : kelas, N, nama : string) -> integer
+{ Mengembalikan index data siswa  yang dicari berdasarkan inputan nama, atau -1 apabila tidak ditemukan}  
+
+procedure sort_data(in/out T : kelas, in N : integer) 
+{ I.S. Terdefinisi Array T yang berisi N data siswa
+  F.S. Data array T terurut membesar berdasarkan nilai rata-rata dengan algoritma insertion sort atau selection sort}
+
+procedure print_data(in T : kelas, in N : integer)
+{ I.S. Terdefinisi Array T yang berisi N data siswa
+  F.S. Tercetak Top-3 data siswa dengan nilai rata-rata tertinggi}

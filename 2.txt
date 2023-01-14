@@ -1,0 +1,131 @@
+Procedure InputData(in/out DataMhs: ArrMhs, N:integer) 
+{I.S. data mahasiswa telah siap pada piranti masukan (kecuali Nilai Akhir)
+ Proses. meminta inputan dari user (jumlah data dan datanya), 
+ F.S. array DataMhs berisi N data mahasiswa berupa Nama, NIM, UTS, UAS dan Kuis}
+kamus
+    Nama, Nim : string
+    Kuis, Uts, Uas : integer
+    Nilai_Akhir : real
+    i : integer
+algoritma
+    i <- 0
+    while i < N do
+        input(Nama, Nim, Kuis, Uts, Uas)
+        DataMhs[i].Nama <- Nama
+        DataMhs[i].NIM <- Nim
+        DataMhs[i].Kuis <- Kuis
+        DataMhs[i].UTS <- UTS
+        i <- i + 1
+    endwhile
+endprocedure
+
+
+Procedure HitungNA(in/out DataMhs: ArrMhs, N:integer) 
+{I.S. terdefinisi array DataMhs yang berisi N data mahasiswa
+ F.S. field NilaiAkhir pada array DataMhs berisi Nilai Akhir yang dihitung dari nilai Kuis, UTS dan UAS}
+kamus
+    nilaiKuis, nilaiUTS, nilaiUAS : real
+    i : integer
+algoritma
+    i <- 0
+    while i < N do
+        nilaiKuis <- 0.2 * real(DataMhs[i].Kuis)
+        nilaiUTS <- 0.4 * real(DataMhs[i].UTS)
+        nilaiUAS <- 0.4 * real(DataMhs[i].UAS)
+        DataMhs[i].NilaiAkhir <- nilaiKuis + nilaiUTS + nilaiUAS
+        i <- i + 1
+    endwhile
+endprocedure
+
+Procedure min_max(in DataMhs: ArrMhs, N:Integer; in/out min:integer, max:integer) 
+{I.S. terdefinisi array DataMhs yang berisi N data mahasiswa
+ F.S. min berisi INDEX/POSISI Nilai Akhir minimum, dan max berisi INDEX/POSISI Nilai Akhir maximum}
+kamus
+    i : integer
+algoritma
+    i <- 0
+    while i<N do
+        if DataMhs[i].NilaiAkhir < DataMhs[min].NilaiAkhir then
+            min <- i
+        else if DataMhs[i].NilaiAkhir > DataMhs[max].NilaiAkhir then
+            max <- i
+        endif
+        i <- i + 1
+    endwhile
+endprocedure
+
+
+Function median(Input DataMhs: ArrMhs, N:Integer) -> Real
+{Mengemblikan nilai median dari Nilai Akhir dari N mahasiswa pada array DataMhs}
+kamus
+    i, j : integer
+    median : Real
+algoritma
+    i <- 0
+    j <- 0
+    while i<N do
+        while j<N do
+            if DataMhs[j].NilaiAkhir > DataMhs[i].NilaiAkhir then
+                DataMhs[j], DataMhs[i] = DataMhs[i], DataMhs[j]
+            endif
+            j <- j + 1
+        endwhile
+        i <- i + 1
+    endwhile
+    if N == 1 then
+        median = DataMhs[0].NilaiAkhir
+        return median
+    endif
+    if N % 2 != 0 then
+        median = DataMhs[(N/2)-1].NilaiAkhir
+    else if N % 2 == 0 then
+        median = (DataMhs[(N/2)-1].NilaiAkhir + DataMhs[N/2].NilaiAkhir) * 0.5
+    endif
+    return median
+endfunction
+
+procedure mencetak(in/out T : ArrMhs, in N :integer)
+{IS. terdefinisi array T yang berisi N elemen.
+FS. menampilkan isi dari array T}
+algoritma
+    print(T[N].Nama, T[N].NIM)
+endprocedure
+
+Program NilaiAkhir
+Kamus
+	Type Mhs  : <	NIM : integer,
+			Nama : integer,
+			Kuis : integer,
+			UTS : integer,
+			UAS : integer
+			NilaiAkhir : real>
+	Type ArrMhs : Array [0..99] of Mhs
+	{Variable lain ditambahkan di bawah ini}
+	T : ArrMhs
+	min,max : integer
+    N : integer
+    nilai_median : real
+
+
+Algoritma :
+	{meminta inputan data mahasiswa}
+    input(N)
+    InputData(T,N)
+    
+	{menghitung nilai akhir tiap siswa}
+    HitungNA(T, N)
+    
+	{mencari Posisi Nilai Akhir minimum dan maximum, lalu mengoutputkan data mahasiswa berupa nama dan nim mahasiswa yang mendapat nilai minimum, dan yang mendapat nilai maksimum}
+    min_max(T,N,min,max)
+    print(“Mahasiswa yang mendapat nilai maksimum: ”)
+    mencetak(T, max)
+
+    print(“Mahasiswa yang mendapat nilai minimum: “)
+    mencetak(T, min)
+
+    
+	{mencari nilai median, dan mengoutputkan nilainya}
+    nilai_median = median(T, N)
+    print(“Median: ”, nilai_median)
+
+endprogram
