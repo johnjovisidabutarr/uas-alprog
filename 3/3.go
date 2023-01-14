@@ -75,6 +75,6 @@ func print_data(T *kelas, N *int) {
 	var j int = 1
 	for i := *N - 1; i > *N-4; i-- {
 		fmt.Println((*T)[i].nama, "rangking", j, "dengan rata-rata", float64((*T)[i].mtk+(*T)[i].bahasa+(*T)[i].ipa)/3)
-		j = 2
+		j++
 	}
 }
