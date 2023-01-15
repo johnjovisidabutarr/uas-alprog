@@ -18,13 +18,20 @@ Kamus
     hasilCari : integer
 Algoritma  
     {baca masukan dari piranti masukan}
-    ...
+    inputarr(arrayA)
+	inputarr(arrayB)
     
     {lakukan pencarian irisan, pengurutan dan pencarian di sini}
-    ...
+    irisanDuaDataNilai(arr2MK, arrayA, arrayB)
+	urutData(arr2MK)
     
     {menampilkan pada piranti keluaran}
-    ...
+    hasilCari = binarySearch(arr2MK,carinama)
+    if hasilCari == -1 then
+        print("Belum mengikuti kedua MK")
+    else then
+        print(arr2MK.arr[hasilCari].nilai)
+    endif
 endprogram      
 
 procedure inputarr(in/out A: arrnilai)
@@ -35,10 +42,65 @@ procedure inputarr(in/out A: arrnilai)
 Procedure irisanDuaDataNilai(In/Out C : arrnilai , In A, B : arrnilai)
 {I.S. Array arr dari A dan B yang berisi data nilai, Array arr dari C masih kosong
  F.S. Array arr dari C telah terisi dengan irisan dari array arr dari A dan B, untuk nilainya diisi dengan rata - rata kedua nilai. }
+ kamus
+    k,i,j  : int
+    avg    : real
+    i <- 0
+    j <- 0
+    k <- 0
+ algoritma
+    while i < A.jml do
+        while j < B.jml do
+            if A.arr[i].nim == B.arr[j].nim then
+                avg = (A.arr[i].nilai + B.arr[j].nilai)/2
+                C.arr[k] = A.arr[i]
+                C.arr[k].nilai = avg
+                k <- k+1
+            endif
+            j<- j+1
+        endwhile
+        i <- i+1
+    endwhile
+    C.jml = k
+endprocedure
+
 
 Procedure urutData(In/Out A : arrnilai)
 {I.S. Array arr dari A belum terurut
  F.S. Array arr dari A sudah terurut menurun/decending berdasarkan nama menggunakan selection sort atau insertion sort}
+ kamus
+    i,j  : int
+    i <- 1
+    j <- i
+ algoritma
+    while i < A.jml do
+        while j > 0 do
+            if A.arr[j-1].nama < B.arr[j].nama then
+                A.arr[j-1], A.arr[j] = A.arr[j], A.arr[j-1]
+            endif
+            j <- j+1
+        endwhile
+        i <- i+1
+    endwhile
+endprocedure
 
 function binarysearch(A : arrnilai, x : string) -> int
 {mengembalikan -1 jika tidak ditemukan nama x pada array arr dari A, atau  mengembalikan index dimana nama X ditemukan}
+kamus
+    left, right, mid  : int
+    left <- 0
+    right <- A.jml - 1
+ algoritma
+    while left<=right do
+        mid = (left+right)/2
+
+        if A.arr[mid].nama === x then
+            return mid
+        else if A.arr[mid].nama < x then
+            right = mid -1
+        else then
+            left = mid + 1
+        endif
+    endwhile
+    return -1
+endprocedure

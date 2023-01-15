@@ -28,7 +28,6 @@ func main() {
 	fmt.Scanln(&carinama)
 
 	hasilCari = binarySearch(&arr2MK, carinama)
-	fmt.Println("hasil cari", hasilCari)
 	if hasilCari == -1 {
 		fmt.Println("Belum mengikuti kedua MK")
 	} else {
@@ -65,7 +64,6 @@ func irisanDuaDataNilai(C, A, B *arrnilai) {
 		}
 	}
 	(*C).jml = k
-	// fmt.Println((*C).arr)
 }
 
 func urutData(A *arrnilai) {
