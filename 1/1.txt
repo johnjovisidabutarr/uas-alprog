@@ -1,0 +1,44 @@
+Program Mahasiswa 
+Kamus 
+    constant nmax : integer 2021
+    type datanilai <
+        nim : string 
+        nama : string 
+        nilai : real
+        >
+    
+    type arrnilai <
+    	arr : array [0..mmax-1] of datanilai 
+        jml : int
+        >
+    arrayA : arrnilai 
+    arrayB : arrnilai
+    arr2MK : arrnilai 
+    carinama : string 
+    hasilCari : integer
+Algoritma  
+    {baca masukan dari piranti masukan}
+    ...
+    
+    {lakukan pencarian irisan, pengurutan dan pencarian di sini}
+    ...
+    
+    {menampilkan pada piranti keluaran}
+    ...
+endprogram      
+
+procedure inputarr(in/out A: arrnilai)
+{I.S. -
+ F.S. arr dari tipe A berisi sejumlah jml data dari masukan user.
+ KET: PROCEDURE INI TERDEFINISI, TIDAK PERLU DITULIS ALGORITMA DARI PROCEDURE INI}
+
+Procedure irisanDuaDataNilai(In/Out C : arrnilai , In A, B : arrnilai)
+{I.S. Array arr dari A dan B yang berisi data nilai, Array arr dari C masih kosong
+ F.S. Array arr dari C telah terisi dengan irisan dari array arr dari A dan B, untuk nilainya diisi dengan rata - rata kedua nilai. }
+
+Procedure urutData(In/Out A : arrnilai)
+{I.S. Array arr dari A belum terurut
+ F.S. Array arr dari A sudah terurut menurun/decending berdasarkan nama menggunakan selection sort atau insertion sort}
+
+function binarysearch(A : arrnilai, x : string) -> int
+{mengembalikan -1 jika tidak ditemukan nama x pada array arr dari A, atau  mengembalikan index dimana nama X ditemukan}
