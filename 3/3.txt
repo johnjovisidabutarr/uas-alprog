@@ -24,20 +24,80 @@ procedure input_data(in/out T : kelas, in/out N : integer)
 { I.S. Data siswa telah siap pada piranti masukan
   Proses. Melakukan proses masukan dari user hingga nama yang diinputkan adalah "stop" atau array telah penuh
   F.S. Array T berisi sejumlah N siswa }
-  Kamus
+ kamus
+    nama                : string
+    mtk, bahasa, ipa, i : integer
+ algoritma
+    while i < NMAX do
+      input(nama, mtk, bahasa, ipa)
+      if nama == "stop" then
+        break
+      endif
 
-  Algoritma :
-  
+      T[i].nama = nama
+      T[i].mtk = mtk
+      T[i].bahasa =  bahasa
+      T[i].ipa = ipa
+      N <- i+1
+      i <- i+1
+    endwhile
+endprocedure
+
 function rata_rata(M :siswa) -> real
 { Mengembalikan nilai rata dari matematika, bahasa, dan ipa}
+ kamus
+    avg   : real
+    i     : integer
+ algoritma
+    while i < NMAX do
+      avg = real((M.mtk + M.bahasa + M.ipa)/3)
+      i <- i+1
+    endwhile
+    return avg
+endfunction
 
 function search_data(T : kelas, N, nama : string) -> integer
 { Mengembalikan index data siswa  yang dicari berdasarkan inputan nama, atau -1 apabila tidak ditemukan}  
+ kamus
+    i   : integer
+ algoritma
+    while i < N do
+      if T[i].nama == nama then
+        return i
+      endif
+      i <- i + 1
+    endwhile
+    return -1
+endfunction
 
 procedure sort_data(in/out T : kelas, in N : integer) 
 { I.S. Terdefinisi Array T yang berisi N data siswa
   F.S. Data array T terurut membesar berdasarkan nilai rata-rata dengan algoritma insertion sort atau selection sort}
+ kamus
+    i,j   : integer
+ algoritma
+    while i < N do
+      while j < N do
+          if real(T[i].mtk + T[i].bahasa + T[i].ipa) < real(T[j].mtk + T[j].bahasa + T[j].ipa) then
+            T[j], T[i] = T[i], T[j]
+          endif
+        j <- j+1
+      endwhile 
+      i <- i+1
+    endwhile
+endprocedure
 
 procedure print_data(in T : kelas, in N : integer)
 { I.S. Terdefinisi Array T yang berisi N data siswa
   F.S. Tercetak Top-3 data siswa dengan nilai rata-rata tertinggi}
+ kamus
+    i,j   : integer
+ algoritma
+    i <- N
+    j <- 1
+    while i>N-4 do
+      print(T[i].nama, "rangking", j, "dengan rata-rata", real((T[i].mtk + T[i].bahasa + T[i].ipa)/3))
+      i <- i-1
+      j <- j+1
+    endwhile
+endprocedure

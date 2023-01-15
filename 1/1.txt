@@ -45,10 +45,10 @@ Procedure irisanDuaDataNilai(In/Out C : arrnilai , In A, B : arrnilai)
  kamus
     k,i,j  : int
     avg    : real
+ algoritma
     i <- 0
     j <- 0
     k <- 0
- algoritma
     while i < A.jml do
         while j < B.jml do
             if A.arr[i].nim == B.arr[j].nim then
@@ -70,9 +70,9 @@ Procedure urutData(In/Out A : arrnilai)
  F.S. Array arr dari A sudah terurut menurun/decending berdasarkan nama menggunakan selection sort atau insertion sort}
  kamus
     i,j  : int
+ algoritma
     i <- 1
     j <- i
- algoritma
     while i < A.jml do
         while j > 0 do
             if A.arr[j-1].nama < B.arr[j].nama then
@@ -86,11 +86,11 @@ endprocedure
 
 function binarysearch(A : arrnilai, x : string) -> int
 {mengembalikan -1 jika tidak ditemukan nama x pada array arr dari A, atau  mengembalikan index dimana nama X ditemukan}
-kamus
+ kamus
     left, right, mid  : int
+ algoritma
     left <- 0
     right <- A.jml - 1
- algoritma
     while left<=right do
         mid = (left+right)/2
 
@@ -103,4 +103,4 @@ kamus
         endif
     endwhile
     return -1
-endprocedure
+endfunction

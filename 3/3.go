@@ -25,6 +25,7 @@ func main() {
 
 	}
 	print_data(&data, &N)
+	fmt.Println("Ok")
 }
 
 func input_data(T *kelas, N *int) {
